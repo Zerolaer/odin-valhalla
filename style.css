@@ -1,156 +1,316 @@
 body {
-    font-family: sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e24; /* Dark background */
+    color: #d4d4d4; /* Light grey text */
+    font-size: 14px;
+    line-height: 1.6;
 }
 
+/* --- Header --- */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #14151a;
+    color: #ffffff;
+    padding: 15px 25px;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #c0a062; /* Main accent border */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35); /* Slightly more pronounced shadow */
 }
 
 header h1 {
     margin: 0;
+    font-size: 1.9em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 main {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
+    padding: 0 20px 30px 20px;
 }
 
-section, div[id*="-section"] { /* Target main sections */
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+/* --- Main Content Sections --- */
+#character-creation-section,
+#characters-list-section,
+#tasks-section {
+    background-color: #2a2d34;
+    padding: 25px;
+    border-radius: 4px;
+    border: 1px solid #c0a062; /* Accent color for border */
+    box-shadow: 0 0 12px rgba(192, 160, 98, 0.2); /* Glow effect with accent color */
 }
 
 #character-creation-section, #tasks-section {
-    flex-basis: 400px; /* Give them a base width */
+    flex-basis: 400px;
     flex-grow: 1;
 }
 
 #characters-list-section {
-    flex-basis: 200px;
+    flex-basis: 250px;
     flex-grow: 1;
+    min-width: 220px;
 }
 
-
+/* Headings within sections */
 h2, h3 {
-    color: #555;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 5px;
+    color: #e8e8e8;
+    border-bottom: 1px solid #a08042; /* Darker accent for heading underline */
+    padding-bottom: 10px;
     margin-top: 0;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px; /* Standardized */
 }
 
+h2 {
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.15em;
+    border-bottom-color: #7a684f;
+    margin-bottom: 20px;
+}
+
+/* --- Forms --- */
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 18px;
 }
 
 form label {
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #b0b0b0;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.6px; /* Standardized */
 }
 
 form input[type="text"],
 form input[type="number"],
 form select {
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* Ensures padding doesn't add to width */
-}
-
-form button {
-    background-color: #5cb85c;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #1c1e22;
+    color: #e0e0e0;
+    border: 1px solid #5a5e66;
+    border-radius: 3px;
+    padding: 12px;
     font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-form button:hover {
-    background-color: #4cae4c;
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #c0a062;
+    box-shadow: 0 0 8px rgba(192, 160, 98, 0.4);
+    outline: none;
 }
 
-#characters-list .character-item {
-    padding: 10px;
-    border: 1px solid #eee;
-    border-radius: 4px;
-    margin-bottom: 5px;
+form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23c0a062%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+    padding-right: 35px;
+}
+
+
+/* --- Buttons --- */
+form button,
+.task-actions button {
+    color: #ffffff;
+    border-width: 1px;
+    border-style: solid;
+    padding: 10px 18px;
+    border-radius: 3px;
     cursor: pointer;
-    background-color: #f9f9f9;
-    overflow-wrap: break-word; /* Handle long character names */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6px; /* Standardized */
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-#characters-list .character-item:hover,
+form button:hover,
+.task-actions button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+form button:active,
+.task-actions button:active {
+    transform: translateY(0px);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+form button[type="submit"] {
+    background-color: #c0a062;
+    border-color: #a08042;
+    color: #14151a;
+}
+
+form button[type="submit"]:hover {
+    background-color: #d4b375;
+    border-color: #c0a062;
+}
+
+.task-actions button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+}
+
+.task-actions .rename-btn {
+    background-color: #4a4e58;
+    border-color: #6a6e78;
+    color: #e0e0e0;
+}
+.task-actions .rename-btn:hover {
+    background-color: #5a5e68;
+    border-color: #7a7e88;
+}
+
+.task-actions .delete-btn {
+    background-color: #8c3838;
+    border-color: #ac4848;
+    color: #f0f0f0;
+}
+.task-actions .delete-btn:hover {
+    background-color: #a04040;
+    border-color: #bc5858;
+}
+
+
+/* Character list items */
+#characters-list .character-item {
+    padding: 12px 15px;
+    border: 1px solid #40444c;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    background-color: #31343b;
+    color: #c0c0c0;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+    overflow-wrap: break-word;
+}
+
+#characters-list .character-item:hover {
+    background-color: #3c3f46;
+    border-color: #c0a062;
+    transform: translateX(2px);
+}
+
 #characters-list .character-item.selected {
-    background-color: #e9e9e9;
+    background-color: #c0a062;
+    color: #14151a;
+    border-color: #d4b375;
+    font-weight: bold;
+}
+#characters-list .character-item.selected:hover {
+    transform: translateX(0);
+    background-color: #d4b375;
 }
 
-#tasks-section {
-    /* Initially hidden, will be shown by JS when a character is selected */
-    /* display: none;  -- Let's keep it visible for now for easier initial styling review */
-}
 
+/* --- Task Lists --- */
 #daily-tasks-list ul,
 #weekly-tasks-list ul {
     list-style-type: none;
     padding: 0;
+    margin-top: 15px; /* Add some space above the task list */
 }
 
 #daily-tasks-list li,
 #weekly-tasks-list li {
-    padding: 8px;
-    border-bottom: 1px solid #f0f0f0;
+    background-color: #30333a; /* Subtle background for task items */
+    padding: 12px 15px;
+    border-bottom: 1px solid #282b30; /* Darker separator */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: #c8c8c8; /* Light text for tasks */
+    transition: background-color 0.2s ease, opacity 0.2s ease; /* Added opacity transition */
+    margin-bottom: 6px; /* Space between task items */
+    border-radius: 3px; /* Slightly rounded corners for task items */
+    font-size: 0.95em;
+}
+
+#daily-tasks-list li:hover,
+#weekly-tasks-list li:hover {
+    background-color: #383b42;
 }
 
 #daily-tasks-list li:last-child,
 #weekly-tasks-list li:last-child {
-    border-bottom: none;
+    border-bottom: none; /* No border for the last item */
 }
 
-#daily-tasks-list input[type="checkbox"],
-#weekly-tasks-list input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-/* Basic styling for task action buttons (rename, delete) */
-.task-actions button {
-    margin-left: 5px;
-    padding: 3px 7px;
-    font-size: 0.8em;
+/* Checkbox specific styling */
+input[type="checkbox"] {
+    accent-color: #c0a062; /* Main accent for the checkmark */
+    width: 18px;
+    height: 18px;
+    margin-right: 15px; /* Slightly more margin */
+    vertical-align: middle;
     cursor: pointer;
+    flex-shrink: 0;
+    /* Adding a subtle border, may not be visible on all browsers due to accent-color dominance */
+    /* border: 1px solid #7a684f;  */
+    /* border-radius: 2px; */
 }
 
-.task-actions .rename-btn {
-    background-color: #f0ad4e;
-    color: white;
-    border: none;
-    border-radius: 3px;
-}
-.task-actions .rename-btn:hover {
-    background-color: #ec971f;
+/* Styling for the task description text */
+.task-description {
+    flex-grow: 1;
+    margin-right: 10px;
+    transition: color 0.2s ease; /* Smooth color transition for completed state */
 }
 
-.task-actions .delete-btn {
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    border-radius: 3px;
+/* Styling for completed task descriptions (JS adds this class to the span) */
+.task-description.completed {
+    color: #777; /* Dimmer text for completed tasks */
+    /* text-decoration: line-through; is applied by JS to li.style, which covers the span too */
 }
-.task-actions .delete-btn:hover {
-    background-color: #c9302c;
+/* Opacity for the whole LI is handled by JS: li.style.opacity */
+
+
+/* Placeholder text styling for empty lists (JS adds these LIs directly) */
+#characters-list p, /* For "No characters created yet..." */
+#daily-tasks-list ul li,
+#weekly-tasks-list ul li {
+    /* This applies to LIs that are placeholders. Need to be careful not to override actual task LIs too much. */
+    /* JS adds specific text like "No daily tasks yet..." */
+    /* The following styles will apply if the LI's content matches placeholder text, or if it's the only child and doesn't have a checkbox (more complex selector) */
 }
+
+/* More targeted placeholder styling: if an LI contains only text and no checkbox (complex to do robustly in pure CSS) */
+/* It's simpler to rely on JS adding a specific class to placeholder LIs or P tags */
+#characters-list p, /* This one is fine as it's a P tag */
+#daily-tasks-list ul li[data-placeholder="true"], /* Example if JS added data-placeholder attribute */
+#weekly-tasks-list ul li[data-placeholder="true"] {
+    color: #666 !important; /* Ensure placeholder text is muted */
+    font-style: italic !important;
+    background-color: transparent !important;
+    justify-content: center !important;
+}
+
+/* Since JS adds LIs like <li>No daily tasks...</li>, we can target them by content if needed, but that's hacky.
+   The current script.js sets `ul.innerHTML = '<li>...</li>'` for placeholders.
+   We can rely on the general `color: #777; font-style: italic;` from the previous generic selector for these,
+   and ensure they don't get hover effects if they are placeholders.
+*/
+#daily-tasks-list ul li:not(:has(input[type="checkbox"])):hover,
+#weekly-tasks-list ul li:not(:has(input[type="checkbox"])):hover {
+    background-color: #30333a; /* Keep placeholder LI background static */
+}
+#daily-tasks-list ul li:not(:has(input[type="checkbox"])),
+#weekly-tasks-list ul li:not(:has(input[type="checkbox"])) {
+    color: #666;
+    font-style: italic;
+    justify-content: center;
+}
+```
