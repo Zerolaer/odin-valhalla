@@ -5,59 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin Valhalla Rising - Task Manager</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Potentially link to a font awesome or other icon library later if needed -->
 </head>
 <body>
     <header>
-        <h1>Odin Valhalla Rising - Task Manager</h1>
+        <div class="header-title">Odin Valhalla Rising - Task Manager</div>
+        <div class="header-actions">
+            <button id="refresh-day-btn">Refresh Day</button>
+            <button id="refresh-week-btn">Refresh Week</button>
+            <button id="add-character-btn">Add New Character</button>
+        </div>
     </header>
-    <main>
-        <div id="character-creation-section">
+
+    <div class="app-container">
+        <aside id="character-sidebar">
+            <h2>Characters</h2>
+            <div id="sidebar-character-list">
+                <!-- Character items will be populated by JS -->
+                <!-- Example: <div class="sidebar-char-item" data-id="1">CharName1</div> -->
+            </div>
+        </aside>
+
+        <main id="main-content">
+            <div id="tasks-display-area">
+                <!-- This H2 will be updated by JS with selected char name -->
+                <h2 id="selected-character-tasks-title">Select a Character</h2>
+
+                <div class="tasks-columns-container">
+                    <section id="daily-tasks-column" class="tasks-column">
+                        <h3>Daily Tasks</h3>
+                        <form id="create-daily-task-form" class="inline-task-form">
+                            <input type="text" id="daily-task-desc" placeholder="New daily task..." required>
+                            <button type="submit">Add</button>
+                        </form>
+                        <ul id="daily-tasks-list-ul">
+                            <!-- Daily tasks will be populated by JS -->
+                        </ul>
+                    </section>
+
+                    <section id="weekly-tasks-column" class="tasks-column">
+                        <h3>Weekly Tasks</h3>
+                        <form id="create-weekly-task-form" class="inline-task-form">
+                            <input type="text" id="weekly-task-desc" placeholder="New weekly task..." required>
+                            <button type="submit">Add</button>
+                        </form>
+                        <ul id="weekly-tasks-list-ul">
+                            <!-- Weekly tasks will be populated by JS -->
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Character Creation Modal -->
+    <div id="character-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
             <h2>Create New Character</h2>
-            <form id="create-character-form">
-                <label for="char-name">Name:</label>
-                <input type="text" id="char-name" name="char-name" required><br><br>
-                <label for="char-level">Level:</label>
-                <input type="number" id="char-level" name="char-level" required><br><br>
-                <label for="char-class">Class:</label>
-                <input type="text" id="char-class" name="char-class" required><br><br>
+            <form id="modal-create-character-form">
+                <div>
+                    <label for="modal-char-name">Name:</label>
+                    <input type="text" id="modal-char-name" required>
+                </div>
+                <div>
+                    <label for="modal-char-level">Level:</label>
+                    <input type="number" id="modal-char-level" required min="1" value="1">
+                </div>
+                <div>
+                    <label for="modal-char-class">Class:</label>
+                    <select id="modal-char-class">
+                        <!-- Options will be populated by JS e.g. Warrior, Mage etc. -->
+                        <!-- Default option -->
+                        <option value="">--Select Class--</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="checkbox" id="modal-char-is-main">
+                    <label for="modal-char-is-main" class="inline-label">Set as Main Character</label>
+                </div>
                 <button type="submit">Create Character</button>
             </form>
         </div>
-        <div id="characters-list-section">
-            <h2>Characters</h2>
-            <div id="characters-list">
-                <!-- Characters will be listed here by JavaScript -->
-            </div>
-        </div>
-        <div id="tasks-section">
-            <h2 id="tasks-section-title">Tasks for </h2>
-            <div id="task-creation-section">
-                <h3>Add New Task</h3>
-                <form id="create-task-form">
-                    <label for="task-desc">Task Description:</label>
-                    <input type="text" id="task-desc" name="task-desc" required><br><br>
-                    <label for="task-type">Task Type:</label>
-                    <select id="task-type" name="task-type">
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                    </select><br><br>
-                    <button type="submit">Add Task</button>
-                </form>
-            </div>
-            <div id="daily-tasks-list">
-                <h3>Daily Tasks</h3>
-                <ul>
-                    <!-- Daily tasks will be listed here -->
-                </ul>
-            </div>
-            <div id="weekly-tasks-list">
-                <h3>Weekly Tasks</h3>
-                <ul>
-                    <!-- Weekly tasks will be listed here -->
-                </ul>
-            </div>
-        </div>
-    </main>
+    </div>
+
     <script src="script.js" defer></script>
 </body>
 </html>

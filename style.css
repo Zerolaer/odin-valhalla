@@ -1,3 +1,4 @@
+/* --- General App Layout --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -6,162 +7,281 @@ body {
     color: #d4d4d4; /* Light grey text */
     font-size: 14px;
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.app-container {
+    display: flex;
+    height: calc(100vh - 68px); /* Adjusted based on new header padding, assuming header border is 2px */
 }
 
 /* --- Header --- */
 header {
     background-color: #14151a;
     color: #ffffff;
-    padding: 15px 25px;
-    text-align: center;
-    margin-bottom: 30px;
+    padding: 12px 25px; /* Adjusted padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 2px solid #c0a062; /* Main accent border */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.35); /* Slightly more pronounced shadow */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 1.9em;
+.header-title {
+    font-size: 1.7em;
+    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 0 20px 30px 20px;
+.header-actions button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    /* Inherit general button styling from below */
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.header-actions button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+.header-actions button:active {
+    transform: translateY(0px);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* --- Main Content Sections --- */
-#character-creation-section,
-#characters-list-section,
-#tasks-section {
-    background-color: #2a2d34;
-    padding: 25px;
-    border-radius: 4px;
-    border: 1px solid #c0a062; /* Accent color for border */
-    box-shadow: 0 0 12px rgba(192, 160, 98, 0.2); /* Glow effect with accent color */
+#add-character-btn {
+    background-color: #c0a062;
+    border-color: #a08042;
+    color: #14151a;
+}
+#add-character-btn:hover {
+    background-color: #d4b375;
+    border-color: #c0a062;
+}
+#refresh-day-btn, #refresh-week-btn {
+    background-color: #4a4e58;
+    border-color: #6a6e78;
+    color: #e0e0e0;
+}
+#refresh-day-btn:hover, #refresh-week-btn:hover {
+    background-color: #5a5e68;
+    border-color: #7a7e88;
 }
 
-#character-creation-section, #tasks-section {
-    flex-basis: 400px;
-    flex-grow: 1;
+/* --- Character Sidebar --- */
+#character-sidebar {
+    width: 230px; /* Adjusted width */
+    min-width: 200px;
+    background-color: #252830; /* Slightly different dark shade for sidebar panel */
+    padding: 20px;
+    border-right: 1px solid #4a4e58;
+    overflow-y: auto;
+    color: #d4d4d4;
 }
 
-#characters-list-section {
-    flex-basis: 250px;
-    flex-grow: 1;
-    min-width: 220px;
-}
-
-/* Headings within sections */
-h2, h3 {
+#character-sidebar h2 {
     color: #e8e8e8;
-    border-bottom: 1px solid #a08042; /* Darker accent for heading underline */
+    border-bottom: 1px solid #a08042;
     padding-bottom: 10px;
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     text-transform: uppercase;
-    letter-spacing: 0.7px; /* Standardized */
+    letter-spacing: 0.7px;
+    font-size: 1.2em;
 }
 
-h2 {
-    font-size: 1.3em;
+#sidebar-character-list .sidebar-char-item {
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 3px;
+    background-color: #31343b;
+    color: #c0c0c0;
+    cursor: pointer;
+    border: 1px solid #40444c;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    font-size: 0.95em;
+    overflow-wrap: break-word;
 }
 
-h3 {
+#sidebar-character-list .sidebar-char-item:hover {
+    background-color: #3c3f46;
+    border-color: #c0a062;
+    transform: translateX(2px);
+}
+
+#sidebar-character-list .sidebar-char-item.selected {
+    background-color: #c0a062;
+    color: #14151a;
+    border-color: #d4b375;
+    font-weight: bold;
+}
+#sidebar-character-list .sidebar-char-item.selected:hover {
+    transform: translateX(0);
+    background-color: #d4b375;
+}
+#sidebar-character-list .sidebar-char-item .main-char-indicator {
+    font-size: 0.8em;
+    color: #f0e68c;
+    margin-left: 5px;
+    font-style: italic;
+}
+
+
+/* --- Main Content Area --- */
+#main-content {
+    flex-grow: 1;
+    padding: 25px;
+    background-color: #1e1e24;
+    overflow-y: auto;
+}
+
+#selected-character-tasks-title {
+    color: #e8e8e8;
+    margin-top: 0; /* Reset margin from generic h2 */
+    margin-bottom: 25px;
+    font-size: 1.6em; /* Larger title for main area */
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border-bottom: 1px solid #a08042; /* Consistent with other h2 but maybe centered */
+    padding-bottom: 10px;
+}
+
+.tasks-columns-container {
+    display: flex;
+    gap: 25px;
+}
+
+.tasks-column {
+    flex: 1;
+    background-color: #2a2d34;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #4a4e58; /* Muted border for columns, sections have accent */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.tasks-column h3 {
+    color: #e0e0e0;
+    border-bottom: 1px solid #7a684f;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
     font-size: 1.15em;
-    border-bottom-color: #7a684f;
+}
+
+/* Inline Task Creation Forms */
+.inline-task-form {
+    display: flex;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-/* --- Forms --- */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-form label {
-    font-weight: bold;
-    color: #b0b0b0;
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 0.6px; /* Standardized */
-}
-
-form input[type="text"],
-form input[type="number"],
-form select {
+.inline-task-form input[type="text"] {
+    flex-grow: 1;
     background-color: #1c1e22;
     color: #e0e0e0;
     border: 1px solid #5a5e66;
     border-radius: 3px;
-    padding: 12px;
-    font-size: 1em;
+    padding: 9px 12px; /* Adjusted padding */
+    font-size: 0.95em;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form select:focus {
+.inline-task-form input[type="text"]:focus {
     border-color: #c0a062;
     box-shadow: 0 0 8px rgba(192, 160, 98, 0.4);
     outline: none;
 }
 
-form select {
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23c0a062%22/%3E%3C/svg%3E');
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 14px;
-    padding-right: 35px;
-}
-
-
-/* --- Buttons --- */
-form button,
-.task-actions button {
-    color: #ffffff;
-    border-width: 1px;
-    border-style: solid;
-    padding: 10px 18px;
-    border-radius: 3px;
-    cursor: pointer;
+.inline-task-form button {
+    padding: 9px 15px; /* Matched to input height */
+    font-size: 0.9em;
+    /* General button styles inherited, specific overrides: */
+    background-color: #555960;
+    border-color: #6a6e78;
+    color: #e0e0e0;
+    text-transform: uppercase; /* Ensure consistency */
+    letter-spacing: 0.6px;
     font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.6px; /* Standardized */
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.inline-task-form button:hover {
+    background-color: #666a70;
+    border-color: #7a7e88; /* Ensure hover border color is defined */
+    transform: translateY(-1px); /* Inherited hover effect */
 }
 
-form button:hover,
-.task-actions button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-}
-form button:active,
-.task-actions button:active {
-    transform: translateY(0px);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+/* --- Task Lists (ul) & Items (li) --- */
+#daily-tasks-list-ul, #weekly-tasks-list-ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+    min-height: 100px;
 }
 
-form button[type="submit"] {
-    background-color: #c0a062;
-    border-color: #a08042;
-    color: #14151a;
+#daily-tasks-list-ul li,
+#weekly-tasks-list-ul li {
+    background-color: #30333a;
+    padding: 12px 15px;
+    border-bottom: 1px solid #282b30;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #c8c8c8;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
+    margin-bottom: 6px;
+    border-radius: 3px;
+    font-size: 0.95em;
 }
 
-form button[type="submit"]:hover {
-    background-color: #d4b375;
-    border-color: #c0a062;
+#daily-tasks-list-ul li:hover,
+#weekly-tasks-list-ul li:hover {
+    background-color: #383b42;
 }
+
+#daily-tasks-list-ul li:last-child,
+#weekly-tasks-list-ul li:last-child {
+    border-bottom: none;
+}
+
+input[type="checkbox"] {
+    accent-color: #c0a062;
+    width: 18px;
+    height: 18px;
+    margin-right: 15px;
+    vertical-align: middle;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.task-description {
+    flex-grow: 1;
+    margin-right: 10px;
+    transition: color 0.2s ease;
+}
+
+.task-description.completed {
+    color: #777;
+    /* text-decoration: line-through; is applied by JS to li.style */
+}
+/* Opacity for the whole LI is handled by JS: li.style.opacity */
 
 .task-actions button {
     padding: 5px 10px;
     font-size: 0.8em;
+    /* General button styles inherited, specific overrides: */
+    letter-spacing: 0.6px; /* Consistent with other buttons */
+    font-weight: bold; /* Consistent */
 }
 
 .task-actions .rename-btn {
@@ -184,133 +304,158 @@ form button[type="submit"]:hover {
     border-color: #bc5858;
 }
 
-
-/* Character list items */
-#characters-list .character-item {
-    padding: 12px 15px;
-    border: 1px solid #40444c;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    background-color: #31343b;
-    color: #c0c0c0;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
-    overflow-wrap: break-word;
-}
-
-#characters-list .character-item:hover {
-    background-color: #3c3f46;
-    border-color: #c0a062;
-    transform: translateX(2px);
-}
-
-#characters-list .character-item.selected {
-    background-color: #c0a062;
-    color: #14151a;
-    border-color: #d4b375;
-    font-weight: bold;
-}
-#characters-list .character-item.selected:hover {
-    transform: translateX(0);
-    background-color: #d4b375;
-}
-
-
-/* --- Task Lists --- */
-#daily-tasks-list ul,
-#weekly-tasks-list ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 15px; /* Add some space above the task list */
-}
-
-#daily-tasks-list li,
-#weekly-tasks-list li {
-    background-color: #30333a; /* Subtle background for task items */
-    padding: 12px 15px;
-    border-bottom: 1px solid #282b30; /* Darker separator */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #c8c8c8; /* Light text for tasks */
-    transition: background-color 0.2s ease, opacity 0.2s ease; /* Added opacity transition */
-    margin-bottom: 6px; /* Space between task items */
-    border-radius: 3px; /* Slightly rounded corners for task items */
-    font-size: 0.95em;
-}
-
-#daily-tasks-list li:hover,
-#weekly-tasks-list li:hover {
-    background-color: #383b42;
-}
-
-#daily-tasks-list li:last-child,
-#weekly-tasks-list li:last-child {
-    border-bottom: none; /* No border for the last item */
-}
-
-/* Checkbox specific styling */
-input[type="checkbox"] {
-    accent-color: #c0a062; /* Main accent for the checkmark */
-    width: 18px;
-    height: 18px;
-    margin-right: 15px; /* Slightly more margin */
-    vertical-align: middle;
-    cursor: pointer;
-    flex-shrink: 0;
-    /* Adding a subtle border, may not be visible on all browsers due to accent-color dominance */
-    /* border: 1px solid #7a684f;  */
-    /* border-radius: 2px; */
-}
-
-/* Styling for the task description text */
-.task-description {
-    flex-grow: 1;
-    margin-right: 10px;
-    transition: color 0.2s ease; /* Smooth color transition for completed state */
-}
-
-/* Styling for completed task descriptions (JS adds this class to the span) */
-.task-description.completed {
-    color: #777; /* Dimmer text for completed tasks */
-    /* text-decoration: line-through; is applied by JS to li.style, which covers the span too */
-}
-/* Opacity for the whole LI is handled by JS: li.style.opacity */
-
-
-/* Placeholder text styling for empty lists (JS adds these LIs directly) */
-#characters-list p, /* For "No characters created yet..." */
-#daily-tasks-list ul li,
-#weekly-tasks-list ul li {
-    /* This applies to LIs that are placeholders. Need to be careful not to override actual task LIs too much. */
-    /* JS adds specific text like "No daily tasks yet..." */
-    /* The following styles will apply if the LI's content matches placeholder text, or if it's the only child and doesn't have a checkbox (more complex selector) */
-}
-
-/* More targeted placeholder styling: if an LI contains only text and no checkbox (complex to do robustly in pure CSS) */
-/* It's simpler to rely on JS adding a specific class to placeholder LIs or P tags */
-#characters-list p, /* This one is fine as it's a P tag */
-#daily-tasks-list ul li[data-placeholder="true"], /* Example if JS added data-placeholder attribute */
-#weekly-tasks-list ul li[data-placeholder="true"] {
-    color: #666 !important; /* Ensure placeholder text is muted */
-    font-style: italic !important;
-    background-color: transparent !important;
-    justify-content: center !important;
-}
-
-/* Since JS adds LIs like <li>No daily tasks...</li>, we can target them by content if needed, but that's hacky.
-   The current script.js sets `ul.innerHTML = '<li>...</li>'` for placeholders.
-   We can rely on the general `color: #777; font-style: italic;` from the previous generic selector for these,
-   and ensure they don't get hover effects if they are placeholders.
-*/
-#daily-tasks-list ul li:not(:has(input[type="checkbox"])):hover,
-#weekly-tasks-list ul li:not(:has(input[type="checkbox"])):hover {
-    background-color: #30333a; /* Keep placeholder LI background static */
-}
-#daily-tasks-list ul li:not(:has(input[type="checkbox"])),
-#weekly-tasks-list ul li:not(:has(input[type="checkbox"])) {
+/* Placeholder text styling for empty lists */
+#daily-tasks-list-ul li:not(:has(input[type="checkbox"])),
+#weekly-tasks-list-ul li:not(:has(input[type="checkbox"])) {
     color: #666;
     font-style: italic;
     justify-content: center;
+    background-color: #30333a; /* Match normal item bg but no hover change */
 }
+#daily-tasks-list-ul li:not(:has(input[type="checkbox"])):hover,
+#weekly-tasks-list-ul li:not(:has(input[type="checkbox"])):hover {
+    background-color: #30333a;
+}
+#sidebar-character-list div:not([data-id]) { /* Placeholder in char list */
+    color: #666;
+    font-style: italic;
+    text-align: center;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+}
+
+
+/* --- Modal Styling --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.75); /* Slightly darker overlay */
+    padding-top: 80px; /* Increased padding */
+}
+
+.modal-content {
+    background-color: #2a2d34;
+    margin: auto;
+    padding: 25px 30px;
+    border: 1px solid #c0a062;
+    border-radius: 4px;
+    width: 90%; /* Responsive width */
+    max-width: 480px; /* Adjusted max width */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.6); /* Stronger shadow for modal */
+    position: relative;
+}
+
+.close-modal-btn {
+    color: #aaa;
+    position: absolute; /* Position relative to modal-content */
+    top: 10px;
+    right: 15px;
+    font-size: 30px; /* Larger close button */
+    font-weight: bold;
+    line-height: 1;
+}
+
+.close-modal-btn:hover,
+.close-modal-btn:focus {
+    color: #c0a062;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    color: #e8e8e8;
+    border-bottom: 1px solid #a08042;
+    padding-bottom: 10px;
+    margin-top: 0; /* Reset from global */
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#modal-create-character-form div {
+    margin-bottom: 18px;
+}
+#modal-create-character-form label {
+    font-weight: bold;
+    color: #b0b0b0;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: block;
+    margin-bottom: 6px;
+}
+#modal-create-character-form label.inline-label { /* For checkbox label */
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 5px; /* Space from checkbox */
+    text-transform: none; /* Normal case for this label */
+    font-size: 0.95em;
+    color: #d4d4d4;
+}
+
+#modal-create-character-form input[type="text"],
+#modal-create-character-form input[type="number"],
+#modal-create-character-form select {
+    width: 100%;
+    box-sizing: border-box;
+    /* Inherit general form input styling */
+    background-color: #1c1e22;
+    color: #e0e0e0;
+    border: 1px solid #5a5e66;
+    border-radius: 3px;
+    padding: 12px;
+    font-size: 1em;
+}
+#modal-create-character-form input[type="text"]:focus,
+#modal-create-character-form input[type="number"]:focus,
+#modal-create-character-form select:focus {
+    border-color: #c0a062;
+    box-shadow: 0 0 8px rgba(192, 160, 98, 0.4);
+    outline: none;
+}
+#modal-create-character-form select { /* Custom arrow for select in modal */
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M5%208l5%205%205-5z%22%20fill%3D%22%23c0a062%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+    padding-right: 35px;
+}
+
+
+#modal-create-character-form input[type="checkbox"] {
+    width: 16px; /* Specific size for modal checkbox */
+    height: 16px;
+    margin-right: 8px;
+    vertical-align: middle;
+    accent-color: #c0a062; /* Ensure accent color */
+}
+#modal-create-character-form button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+    /* Inherit primary button styling */
+    background-color: #c0a062;
+    border-color: #a08042;
+    color: #14151a;
+    padding: 12px 18px; /* Larger padding for modal primary button */
+    font-size: 1.05em;
+}
+#modal-create-character-form button[type="submit"]:hover {
+    background-color: #d4b375;
+    border-color: #c0a062;
+}
+
+/* Old section IDs - ensure they are not used or are reset if they were for layout */
+/* #character-creation-section, #characters-list-section, #tasks-section {} */
+/* These were panel styles, now applied to new elements or handled by new layout. */
+
 ```
